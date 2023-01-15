@@ -85,11 +85,11 @@ def download():
     data = data[data['data_type'].isin(['Mobile Broadband', 'Fixed Broadband'])]
     data = data[data['data_category'].isin(['Nationwide'])]
     downloadList = data.to_dict('records')
+    if os.path.isdir('data') == False:
+        os.mkdir('data')
     cachedFiles = os.listdir('data')
     cachedFiles = [entry for entry in cachedFiles if entry.endswith(".zip")]
     cachedFileNames = [x.split('.')[0] for x in cachedFiles]
-    if os.path.isdir('data') == False:
-        os.mkdir('data')
     print('Download Progress')
     for item in tqdm(downloadList):
         url = f"https://broadbandmap.fcc.gov/nbm/map/api/getNBMDataDownloadFile/{item['id']}/1"
