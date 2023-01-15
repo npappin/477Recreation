@@ -94,7 +94,7 @@ def download():
     for item in tqdm(downloadList):
         url = f"https://broadbandmap.fcc.gov/nbm/map/api/getNBMDataDownloadFile/{item['id']}/1"
         if item['file_name'] not in cachedFileNames:
-            print(item['file_name'])
+            # print(item['file_name'])
             retryableErrors = [requests.exceptions.ChunkedEncodingError]
             r = retry_call(s.get, fkwargs={'url': url}, exceptions=retryableErrors, tries=2, delay=2, backoff=5)
             # r = downloadWrapper(s, url)
